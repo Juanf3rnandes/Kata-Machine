@@ -35,16 +35,11 @@ export default class Queue<T> {
 
         if (!this.head) {
             this.tail = undefined;
-        } else {
-            return value;
         }
+        return value;
     }
 
     peek(): T | undefined {
-        if (!this.head) {
-            return undefined;
-        } else {
-            return this.head.value;
-        }
+        return this.head?.value;
     }
 }

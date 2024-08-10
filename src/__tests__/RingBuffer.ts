@@ -1,7 +1,7 @@
-import RingBuffer from "@code/RingBuffer";
+import RingBuffer from "day1/RingBuffer";
 
-test("RingBuffer", function() {
-    const buffer = new RingBuffer<number>();
+test("RingBuffer", function () {
+    const buffer = new RingBuffer();
 
     buffer.push(5);
     expect(buffer.pop()).toEqual(5);
@@ -20,5 +20,3 @@ test("RingBuffer", function() {
     expect(buffer.get(1)).toEqual(9);
     expect(buffer.get(0)).toEqual(42);
 });
-
-
