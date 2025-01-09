@@ -5,14 +5,13 @@ export default function compare(
     if (!a && !b) {
         return true;
     }
-
     if (!a || !b) {
         return false;
     }
 
-    if (a.value !== b.value) {
+    if (a !== b) {
         return false;
     }
 
-    return compare(a.left, b.left) && compare(a.right, b.right);
+    return compare(a.left, b.left) && compare(b.right, a.right);
 }
