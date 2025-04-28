@@ -1,6 +1,6 @@
 type Node<T> = {
     value: T;
-    next?: Node<T>;
+    next: Node<T>;
 };
 
 export default class Queue<T> {
@@ -14,32 +14,40 @@ export default class Queue<T> {
         this.length = 0;
     }
 
-    enqueue(item: T): void {
-        const node = { value: item } as Node<T>;
-        this.length++;
+    enqueue(value: T): void {
+        const node = { value: value } as Node<T>;
+
         if (!this.tail) {
             this.tail = this.head = node;
-            return;
         }
         this.tail.next = node;
         this.tail = node;
+        this.length++;
     }
 
     deque(): T | undefined {
         if (!this.head) {
             return undefined;
         }
-        this.length--;
-        const value = this.head.value;
         this.head = this.head.next;
-
-        if (!this.head) {
-            this.tail = undefined;
-        }
-        return value;
+        this.length--;
+        return this.head.value;
     }
 
     peek(): T | undefined {
         return this.head?.value;
+    }
+
+    isEmpty(): boolean {
+        if (!this.head) {
+            return true;
+        }
+
+        return false;
+    }
+
+    clear(): void {
+        this.head = this.tail = undefined;
+        this.length = 0;
     }
 }

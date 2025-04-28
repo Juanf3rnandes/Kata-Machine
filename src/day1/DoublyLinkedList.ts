@@ -1,19 +1,13 @@
-interface Node<T> {
-    value: T;
-    next: Node<T> | null;
-    prev: Node<T> | null;
-}
-
 export default class DoublyLinkedList<T> {
     public length: number;
-    private head: Node<T> | undefined;
-    private tail: Node<T> | undefined;
+    private head: ListNode<T> | undefined;
+    private tail: ListNode<T> | undefined;
 
     constructor() {}
 
     prepend(item: T): void {
         this.length++;
-        const node = { value: item } as Node<T>;
+        const node = { value: item } as ListNode<T>;
 
         if (!this.head) {
             this.head = node;
@@ -29,7 +23,8 @@ export default class DoublyLinkedList<T> {
     }
 
     append(item: T): void {
-        const node = { value: item } as Node<T>;
+        const node = { value: item } as ListNode<T>;
+
         this.length++;
 
         if (!this.tail) {
@@ -49,10 +44,33 @@ export default class DoublyLinkedList<T> {
             this.head = this.tail = undefined;
             return;
         }
-        const node = { value: item } as Node<T>;
+        const node = { value: item } as ListNode<T>;
+
+        return undefined;
     }
 
-    get(idx: number): T | undefined {}
+    get(idx: number): T | undefined {
+        return undefined;
+    }
 
-    removeAt(idx: number): T | undefined {}
+    removeAt(idx: number): T | undefined {
+        if (idx < 0 || idx > this.length) {
+            return undefined;
+        }
+
+        if (idx == 0) {
+            return this.head?.value;
+        } else {
+            let current = this.head;
+            let previous = current;
+            for (let i = 0; i < idx; i++) {
+                previous = current;
+                current = current?.next;
+            }
+
+            previous = current?.next;
+            this.length--;
+            return previous?.value;
+        }
+    }
 }

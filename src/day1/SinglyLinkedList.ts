@@ -1,28 +1,52 @@
-interface Node<T> {
-    value: T;
-    next: Node<T> | null;
-    prev: Node<T> | null;
-}
-
 export default class SinglyLinkedList<T> {
     public length: number;
-    public head: Node<T> | undefined;
+    public head: ListNode<T> | undefined;
 
     constructor() {
         this.length = 0;
         this.head = undefined;
     }
 
-    prepend(item: T): void {}
+    prepend(item: T): void {
+        const node = { value: item } as ListNode<T>;
 
-    insertAt(item: T, idx: number): void {}
+        if (!this.head) {
+            this.head = node;
+        }
 
-    append(item: T): void {
-        const node = { value: item, next: null } as Node<T>;
+        node.next = this.head;
+        this.head = node;
+
+        this.length++;
+    }
+
+    insertAt(item: T, idx: number): void {
+        const node = { value: item } as ListNode<T>;
         let current = this.head;
 
         if (!this.head) {
             this.head = node;
+        }
+
+        if (idx >= 0 && idx <= this.length) {
+            for (let i = 0; i < idx - 1; i++) {
+                current = current?.next;
+            }
+            if (current) {
+                node.next = current.next;
+                current.next = node;
+                this.length++;
+            }
+        }
+        return;
+    }
+
+    append(item: T): void {
+        const node = { value: item } as ListNode<T>;
+        let current = this.head;
+
+        if (!this.head) {
+            this.head = this.head;
         }
         while (current?.next !== null) {
             current = current?.next;
@@ -37,15 +61,37 @@ export default class SinglyLinkedList<T> {
         if (idx < 0 || idx >= this.length) {
             return undefined;
         }
+
+        if (idx == 0) {
+            return this.head?.value;
+        }
+
         let current = this.head;
-        for (let i = 0; current && i < idx; i++) {
-            current = current.next;
+        for (let i = 0; i < idx; i++) {
+            current = current?.next;
         }
 
         return current?.value;
     }
 
     removeAt(idx: number): T | undefined {
+        if (idx < 0 || idx >= this.length) {
+            return undefined;
+        }
+
+        if (idx == 0) {
+            return this.head?.value;
+        } else {
+            let current = this.head;
+            let previous = current;
+
+            for (let i = 0; i < idx; i++) {
+                let current = this.head;
+                let previous = current;
+            }
+            previous.next = current?.next;
+            this.length--;
+        }
         return undefined;
     }
 }

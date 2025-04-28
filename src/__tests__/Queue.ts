@@ -3,12 +3,12 @@ import Queue from "@code/Queue";
 test("queue", function () {
     const list = new Queue<number>();
 
-    // list.enqueue(12);
-    // expect(list.peek()).toEqual(12);
-    // expect(list.length).toEqual(1);
-    // list.enqueue(13);
-    // list.deque();
-    // expect(list.peek()).toEqual(13);
+    list.enqueue(12);
+    expect(list.peek()).toEqual(12);
+    expect(list.length).toEqual(1);
+    list.enqueue(13);
+    list.deque();
+    expect(list.peek()).toEqual(13);
 
     list.enqueue(12);
     list.enqueue(7);
@@ -29,4 +29,8 @@ test("queue", function () {
     list.enqueue(69);
     expect(list.peek()).toEqual(69);
     expect(list.length).toEqual(1);
+
+    // list.clear();
+    // expect(list.peek()).toEqual(undefined);
+    // expect(list.length).toEqual(0);
 });
